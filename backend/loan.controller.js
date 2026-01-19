@@ -1,4 +1,4 @@
-const Loan = require('./Customer.model');
+const Loan = require('./loan.model');
 
 exports.getLoans = async (req, res) => {
   const data = await Loan.getAll();

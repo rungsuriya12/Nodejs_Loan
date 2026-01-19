@@ -1,9 +1,9 @@
 const sql = require('mssql');
 
 const config = {
-  user: 'sa',
+  user: 'sasa',
   password: '0821142514Zx',
-  server: 'KSP696\\SQLEXPRESS4',
+  server: 'DESKTOP-0CDFREI\\SQLEXPRESS',
   database: 'Loan_Data',
   options: {
     encrypt: false,
