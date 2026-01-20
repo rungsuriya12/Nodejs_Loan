@@ -60,8 +60,8 @@ exports.create = async (data) => {
     approvedAmount = 0;
     reason = 'ไม่เข้าเงื่อนไขการขอสินเชื่อ';
   } else {
-    decision = 'APPROVE';
-    approvedAmount = data.loan_amount;
+    decision = 'PENDING';
+    approvedAmount = null;
     reason = '-';
   }
 
@@ -92,12 +92,16 @@ exports.create = async (data) => {
 
 exports.update = async (id, data) => {
   await sql.query`
-    UPDATE customers
-    SET name = ${data.name},
-        email = ${data.email}
-    WHERE id = ${id}
+  UPDATE loan_approvals
+  SET
+      decision = ${data.decision},
+      approved_amount = ${data.approved_amount},
+      reason_codes = ${data.reason_codes},
+      approved_at = GETDATE()
+      WHERE id = ${id}
   `;
 };
+
 
 exports.remove = async (id) => {
   await sql.query`
