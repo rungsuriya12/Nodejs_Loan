@@ -61,7 +61,7 @@ exports.insertLoanApproval = async (data) => {
       approved_at
     )
     VALUES (
-      ${data.customer_id},
+      ${data.user_id},
       ${data.decision},
       ${data.approved_amount},
       ${data.reason},
