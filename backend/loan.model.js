@@ -22,15 +22,12 @@ WHERE la.id = ${id};
   return result.recordset[0];
 };
 
-  function random13Digit() {
-  return Math.floor(1000000000000 + Math.random() * 9000000000000)}
-  
   
 // Add Customer + Loan
-exports.create = async (data) => {
-  const randomUserId = random13Digit()
-  // insert ตาราง customers
-  await sql.query`
+// loan.model.js
+
+exports.insertCustomer = async (data) => {
+  const result = await sql.query`
     INSERT INTO customers (
       user_id,
       citizen_id,
@@ -51,39 +48,28 @@ exports.create = async (data) => {
     )
   `;
 
-  let decision;
-  let approvedAmount;
-  let reason;
+  return result;
+};
 
-  if (data.monthly_income < 15000) {
-    decision = 'REJECTED';
-    approvedAmount = 0;
-    reason = 'ไม่เข้าเงื่อนไขการขอสินเชื่อ';
-  } else {
-    decision = 'PENDING';
-    approvedAmount = null;
-    reason = '-';
-  }
-
-  // insert ตาราง loan_approvals
-  await sql.query`
+exports.insertLoanApproval = async (data) => {
+  const result = await sql.query`
     INSERT INTO loan_approvals (
-    customer_id,
+      customer_id,
       decision,
       approved_amount,
       reason_codes,
       approved_at
     )
     VALUES (
-     ${data.user_id},
-      ${decision},
-      ${approvedAmount},
-      ${reason},
+      ${data.customer_id},
+      ${data.decision},
+      ${data.approved_amount},
+      ${data.reason},
       GETDATE()
     )
   `;
 
-  return { success: true };
+  return result;
 };
 
 

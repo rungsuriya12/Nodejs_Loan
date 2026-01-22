@@ -1,9 +1,9 @@
 const sql = require('mssql');
 
 const config = {
-  user: 'sasa',
+  user: 'sa',
   password: '0821142514Zx',
-  server: 'DESKTOP-0CDFREI\\SQLEXPRESS',
+  server: 'KSP696\\SQLEXPRESS4',
   database: 'Loan_Data',
   options: {
     encrypt: false,
@@ -18,3 +18,6 @@ sql.connect(config)
 
 
 module.exports = sql;
+
+  //user: 'sasa',
+  //password: '0821142514Zx',
